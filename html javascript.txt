@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning Hub</title>
+    <link rel="stylesheet" href="style3.css">
+    </head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Interactive Learning Hub</h1>
+            <p>Enhance your web development skills with these interactive features</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="quiz-section">
+            <h2>CSS & JavaScript Quiz</h2>
+            <p>Test your knowledge with this interactive quiz. Select an option for each question and see your score at the end!</p>
+            
+            <button id="start-quiz-btn">Start Quiz</button>
+            
+            <div class="quiz-container" id="quiz-container">
+                <div class="quiz-header">
+                    <h3 id="quiz-title">CSS & JavaScript Quiz</h3>
+                </div>
+                
+                <div class="quiz-body">
+                    <div class="question" id="question"></div>
+                    <div class="options" id="options"></div>
+                </div>
+                
+                <div class="quiz-footer">
+                    <div class="quiz-progress" id="progress"></div>
+                    <button id="next-btn">Next Question</button>
+                </div>
+            </div>
+            
+            <div class="quiz-result" id="quiz-result">
+                <h3>Quiz Completed!</h3>
+                <div class="score" id="score"></div>
+                <p id="result-message"></p>
+                <button id="restart-quiz-btn">Restart Quiz</button>
+            </div>
+        </section>
+
+        <section id="carousel-section">
+            <h2>Web Development Concepts</h2>
+            <p>Explore these key concepts in modern web development.</p>
+            
+            <div class="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="HTML">
+                        <div class="carousel-caption">
+                            <h3>HTML5</h3>
+                            <p>The foundation of all web pages, providing structure and content.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="CSS">
+                        <div class="carousel-caption">
+                            <h3>CSS3</h3>
+                            <p>Styles and layouts that make web pages visually appealing.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="JavaScript">
+                        <div class="carousel-caption">
+                            <h3>JavaScript</h3>
+                            <p>Adds interactivity and dynamic behavior to web pages.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Responsive Design">
+                        <div class="carousel-caption">
+                            <h3>Responsive Design</h3>
+                            <p>Ensures websites work well on all devices from mobile to desktop.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-control" id="prev-btn">❮</button>
+                    <button class="carousel-control" id="next-carousel-btn">❯</button>
+                </div>
+                
+                <div class="carousel-indicators" id="indicators"></div>
+            </div>
+        </section>
+
+        <section class="api-section">
+            <h2>Live Data from APIs</h2>
+            <p>These sections fetch and display real-time data from public APIs.</p>
+            
+            <div class="api-container">
+                <div class="api-weather">
+                    <h3>Current Weather in Kolkata</h3>
+                    <div class="api-data" id="weather-data">
+                        <div class="loader"></div>
+                    </div>
+                    <button id="refresh-weather">Refresh Weather</button>
+                </div>
+                
+                <div class="api-joke">
+                    <h3>Programming Joke</h3>
+                    <div class="api-data" id="joke-data">
+                        <div class="loader"></div>
+                    </div>
+                    <button id="refresh-joke">Get Another Joke</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Quiz Data and Functionality
+        const quizQuestions = [
+            {
+                question: "What does CSS stand for?",
+                options: [
+                    "Computer Style Sheets",
+                    "Creative Style Sheets",
+                    "Cascading Style Sheets",
+                    "Colorful Style Sheets"
+                ],
+                answer: 2
+            },
+            {
+                question: "Which HTML attribute is used to define inline styles?",
+                options: [
+                    "class",
+                    "font",
+                    "styles",
+                    "style"
+                ],
+                answer: 3
+            },
+            {
+                question: "How do you select an element with id 'demo' in CSS?",
+                options: [
+                    ".demo",
+                    "#demo",
+                    "demo",
+                    "*demo"
+                ],
+                answer: 1
+            },
+            {
+                question: "Which property is used to change the background color?",
+                options: [
+                    "bgcolor",
+                    "color",
+                    "background-color",
+                    "bg-color"
+                ],
+                answer: 2
+            },
+            {
+                question: "How do you call a function named 'myFunction' in JavaScript?",
+                options: [
+                    "call myFunction()",
+                    "myFunction()",
+                    "call function myFunction",
+                    "execute myFunction"
+                ],
+                answer: 1
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const nextBtn = document.getElementById('next-btn');
+        const progressElement = document.getElementById('progress');
+        const quizResult = document.getElementById('quiz-result');
+        const scoreElement = document.getElementById('score');
+        const resultMessage = document.getElementById('result-message');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        startQuizBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', showNextQuestion);
+        restartQuizBtn.addEventListener('click', startQuiz);
+
+        function startQuiz() {
+            startQuizBtn.style.display = 'none';
+            quizContainer.style.display = 'block';
+            quizResult.style.display = 'none';
+            currentQuestionIndex = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsElement.appendChild(optionElement);
+            });
+            
+            progressElement.textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+            nextBtn.disabled = true;
+        }
+
+        function resetState() {
+            while (optionsElement.firstChild) {
+                optionsElement.removeChild(optionsElement.firstChild);
+            }
+            selectedOption = null;
+        }
+
+        function selectOption(index) {
+            if (selectedOption !== null) return;
+            
+            selectedOption = index;
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            nextBtn.disabled = false;
+        }
+
+        function showNextQuestion() {
+            // Check if answer is correct
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === currentQuestion.answer) {
+                    option.classList.add('correct');
+                } else if (index === selectedOption && index !== currentQuestion.answer) {
+                    option.classList.add('incorrect');
+                }
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (selectedOption === currentQuestion.answer) {
+                score++;
+            }
+            
+            nextBtn.textContent = 'Next Question';
+            nextBtn.removeEventListener('click', showNextQuestion);
+            nextBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    showQuestion();
+                    nextBtn.textContent = 'Next Question';
+                    nextBtn.removeEventListener('click', showNextQuestion);
+                    nextBtn.addEventListener('click', showNextQuestion);
+                } else {
+                    showResult();
+                }
+            });
+        }
+
+        function showResult() {
+            quizContainer.style.display = 'none';
+            quizResult.style.display = 'block';
+            scoreElement.textContent = `You scored ${score} out of ${quizQuestions.length}`;
+            
+            const percentage = (score / quizQuestions.length) * 100;
+            if (percentage >= 80) {
+                resultMessage.textContent = 'Excellent work! You have a strong understanding of CSS and JavaScript.';
+            } else if (percentage >= 60) {
+                resultMessage.textContent = 'Good job! You have a decent understanding but could review some concepts.';
+            } else {
+                resultMessage.textContent = 'Keep practicing! Review the material and try again.';
+            }
+        }
+
+        // Carousel Functionality
+        const carouselInner = document.getElementById('carousel-inner');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextCarouselBtn = document.getElementById('next-carousel-btn');
+        const indicatorsContainer = document.getElementById('indicators');
+
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        // Create indicators
+        items.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (index === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(index));
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update active indicator
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateCarousel();
+        }
+
+        nextCarouselBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // API Fetching Functionality
+        const weatherData = document.getElementById('weather-data');
+        const jokeData = document.getElementById('joke-data');
+        const refreshWeather = document.getElementById('refresh-weather');
+        const refreshJoke = document.getElementById('refresh-joke');
+
+        // Fetch weather data for Kolkata
+        function fetchWeather() {
+            weatherData.innerHTML = '<div class="loader"></div>';
+            
+            // Using OpenWeatherMap API (note: in a real app, you'd need an API key)
+            // For demonstration, we'll use a mock response for Kolkata
+            setTimeout(() => {
+                // Mock data for Kolkata - in a real app, you would use fetch() to get real data
+                const kolkataWeather = {
+                    temp: Math.floor(Math.random() * 10) + 25, // Typical Kolkata temperature range
+                    description: ['Sunny', 'Humid', 'Partly Cloudy', 'Rainy'][Math.floor(Math.random() * 4)],
+                    icon: getWeatherIcon(),
+                    humidity: Math.floor(Math.random() * 30) + 60, // Kolkata is often humid
+                    wind: (Math.random() * 10 + 5).toFixed(1) // Moderate wind speeds
+                };
+                
+                weatherData.innerHTML = `
+                    <div class="weather-icon">${kolkataWeather.icon}</div>
+                    <div class="weather-temp">${kolkataWeather.temp}°C</div>
+                    <div class="weather-desc">${kolkataWeather.description}</div>
+                    <div>Humidity: ${kolkataWeather.humidity}%</div>
+                    <div>Wind: ${kolkataWeather.wind} km/h</div>
+                    <div class="weather-location">Kolkata, India</div>
+                `;
+            }, 1000);
+        }
+
+        function getWeatherIcon() {
+            const icons = ['☀️', '🌤️', '⛅', '🌧️', '🌦️', '🌩️'];
+            return icons[Math.floor(Math.random() * icons.length)];
+        }
+
+        // Fetch joke data
+        function fetchJoke() {
+            jokeData.innerHTML = '<div class="loader"></div>';
+            
+            // Using JokeAPI (mock for this example)
+            setTimeout(() => {
+                const programmingJokes = [
+                    {
+                        setup: "Why do programmers prefer dark mode?",
+                        punchline: "Because light attracts bugs."
+                    },
+                    {
+                        setup: "How many programmers does it take to change a light bulb?",
+                        punchline: "None, that's a hardware problem."
+                    },
+                    {
+                        setup: "Why do Java developers wear glasses?",
+                        punchline: "Because they can't C#."
+                    },
+                    {
+                        setup: "Why was the JavaScript developer sad?",
+                        punchline: "Because he didn't know how to 'null' his feelings."
+                    },
+                    {
+                        setup: "What's the object-oriented way to become wealthy?",
+                        punchline: "Inheritance."
+                    }
+                ];
+                
+                const randomJoke = programmingJokes[Math.floor(Math.random() * programmingJokes.length)];
+                
+                jokeData.innerHTML = `
+                    <div class="joke-setup">${randomJoke.setup}</div>
+                    <div class="joke-punchline">${randomJoke.punchline}</div>
+                `;
+            }, 1000);
+        }
+
+        // Event listeners for refresh buttons
+        refreshWeather.addEventListener('click', fetchWeather);
+        refreshJoke.addEventListener('click', fetchJoke);
+
+        // Initial fetch
+        fetchWeather();
+        fetchJoke();
+    </script>
+</body>
+</html>
